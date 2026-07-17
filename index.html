@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ninaix 的个人数字档案——记录软件、设计、实验与仍在形成的想法。">
+  <meta name="theme-color" content="#050505">
+  <link rel="canonical" href="https://ninaix0217.github.io/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ninaix — A Quiet Archive">
+  <meta property="og:description" content="Fragments of thought, form, and distant light.">
+  <meta property="og:image" content="https://ninaix0217.github.io/assets/hero-black-hole-v2.png">
+  <meta property="og:url" content="https://ninaix0217.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Ninaix — A Quiet Archive</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #050505;
+      --ivory: #eee8dc;
+      --paper: #e9e2d6;
+      --paper-ink: #14120f;
+      --amber: #c2a47c;
+      --line: rgba(238, 232, 220, .17);
+      --line-dark: rgba(20, 18, 15, .18);
+      --page: min(92vw, 1480px);
+      --serif: "Bodoni 72", Didot, "Iowan Old Style", "Times New Roman", serif;
+      --sans: Inter, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--ink); }
+    body { margin: 0; min-width: 320px; overflow-x: hidden; background: var(--ink); color: var(--ivory); font-family: var(--sans); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: var(--amber); color: var(--ink); }
+    .page { width: var(--page); margin-inline: auto; }
+    .skip-link { position: fixed; left: 18px; top: 18px; z-index: 100; padding: 10px 14px; transform: translateY(-180%); background: var(--ivory); color: var(--ink); font-size: 12px; text-decoration: none; }
+    .skip-link:focus { transform: none; }
+
+    .site-header { position: fixed; inset: 0 0 auto; z-index: 50; border-bottom: 1px solid transparent; transition: background .5s ease, border-color .5s ease, backdrop-filter .5s ease; }
+    .site-header.scrolled { background: rgba(5, 5, 5, .72); border-color: rgba(238, 232, 220, .08); backdrop-filter: blur(18px); }
+    .nav { height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .brand { display: inline-flex; align-items: center; gap: 13px; min-width: 152px; color: rgba(238, 232, 220, .72); text-decoration: none; transition: color .35s ease; }
+    .brand:hover { color: var(--ivory); }
+    .brand-symbol { position: relative; width: 28px; height: 32px; flex: 0 0 auto; font-family: var(--serif); font-size: 29px; font-weight: 400; line-height: 1; letter-spacing: -.08em; }
+    .brand-symbol i { position: absolute; top: -1px; right: -1px; font-family: var(--sans); font-size: 8px; font-style: normal; font-weight: 300; letter-spacing: 0; }
+    .brand-rule { width: 1px; height: 25px; background: currentColor; opacity: .28; }
+    .brand-word { font-family: var(--serif); font-size: 15px; font-weight: 400; letter-spacing: .16em; transition: opacity .45s ease, transform .45s ease; }
+    .site-header.scrolled .brand-word { opacity: .58; transform: translateX(-2px); }
+    .nav-links { display: flex; align-items: center; gap: clamp(22px, 3.2vw, 52px); }
+    .nav-links a { position: relative; color: rgba(238, 232, 220, .56); font-size: 10px; font-weight: 500; letter-spacing: .23em; text-decoration: none; text-transform: uppercase; transition: color .3s ease; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: .23em; bottom: -9px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .35s ease; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--ivory); }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+    .hero { position: relative; min-height: 100svh; isolation: isolate; overflow: hidden; background: var(--ink); }
+    .hero-media { position: absolute; z-index: -3; inset: -7% -4% -9%; background: url("assets/hero-black-hole-v2.png") 55% 48% / cover no-repeat; transform: scale(1.035); will-change: transform; }
+    .hero::before { content: ""; position: absolute; z-index: -2; inset: 0; background: linear-gradient(90deg, rgba(5,5,5,.55), rgba(5,5,5,.16) 38%, transparent 66%), linear-gradient(180deg, rgba(5,5,5,.22), transparent 24%, transparent 66%, rgba(5,5,5,.78) 94%, #050505); pointer-events: none; }
+    .hero::after { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .13; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
+    .hero-content { min-height: 100svh; display: grid; grid-template-columns: minmax(260px, 430px) 1fr; align-items: end; padding-top: 150px; padding-bottom: clamp(82px, 11vh, 132px); }
+    .hero-copy { max-width: 410px; }
+    .overline { display: flex; align-items: center; gap: 13px; margin: 0 0 25px; color: rgba(238,232,220,.55); font-size: 9px; font-weight: 500; letter-spacing: .29em; line-height: 1.5; text-transform: uppercase; }
+    .overline::before { content: ""; width: 34px; height: 1px; background: currentColor; opacity: .55; }
+    .hero h1 { max-width: 390px; margin: 0; color: rgba(238,232,220,.88); font-family: var(--serif); font-size: clamp(36px, 4.2vw, 66px); font-weight: 400; line-height: .98; letter-spacing: -.035em; }
+    .hero h1 em { color: rgba(194,164,124,.9); font-style: italic; font-weight: 400; }
+    .hero-note { max-width: 340px; margin: 25px 0 0; color: rgba(238,232,220,.46); font-size: 12px; font-weight: 300; line-height: 1.9; letter-spacing: .045em; }
+    .hero-meta { align-self: end; justify-self: end; display: grid; grid-template-columns: repeat(2, auto); gap: 13px 31px; margin-bottom: 2px; color: rgba(238,232,220,.39); font-size: 8px; letter-spacing: .23em; line-height: 1.5; text-transform: uppercase; }
+    .hero-meta strong { color: rgba(238,232,220,.66); font-weight: 400; }
+    .scroll-cue { position: absolute; left: 50%; bottom: 25px; display: flex; align-items: center; gap: 12px; transform: translateX(-50%); color: rgba(238,232,220,.33); font-size: 8px; letter-spacing: .25em; text-transform: uppercase; }
+    .scroll-cue span { width: 42px; height: 1px; overflow: hidden; background: rgba(238,232,220,.16); }
+    .scroll-cue span::after { content: ""; display: block; width: 45%; height: 100%; background: var(--ivory); animation: scan 2.5s ease-in-out infinite; }
+    @keyframes scan { 0%,100% { transform: translateX(-110%); } 52% { transform: translateX(245%); } }
+
+    .archive { position: relative; z-index: 2; min-height: 125vh; padding: clamp(105px,14vw,210px) 0 clamp(120px,16vw,230px); background: radial-gradient(ellipse at 56% 0%, rgba(148,102,59,.12), transparent 36%), var(--ink); }
+    .archive-head { display: grid; grid-template-columns: 1fr 2.1fr; gap: 8vw; padding-bottom: 65px; border-bottom: 1px solid var(--line); }
+    .section-index { color: rgba(238,232,220,.4); font-size: 9px; letter-spacing: .26em; text-transform: uppercase; }
+    .archive-title { margin: 0; font-family: var(--serif); font-size: clamp(52px,8vw,118px); font-weight: 400; line-height: .88; letter-spacing: -.045em; }
+    .archive-title span { display: block; margin-left: 17%; color: rgba(238,232,220,.37); font-style: italic; }
+    .work-list { list-style: none; margin: 0; padding: 0; }
+    .work-item { position: relative; display: grid; grid-template-columns: 80px minmax(240px,1.15fr) minmax(220px,.85fr) 28px; align-items: center; gap: 32px; min-height: 190px; border-bottom: 1px solid var(--line); color: rgba(238,232,220,.52); text-decoration: none; transition: color .4s ease, padding .45s cubic-bezier(.22,1,.36,1); }
+    .work-item::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: rgba(238,232,220,.035); opacity: 0; transition: opacity .45s ease; }
+    .work-item:hover { color: var(--ivory); padding-inline: 13px; }
+    .work-item:hover::before { opacity: 1; }
+    .work-number { font-family: var(--serif); font-size: 14px; font-style: italic; }
+    .work-name { margin: 0; color: currentColor; font-family: var(--serif); font-size: clamp(34px,4vw,60px); font-weight: 400; line-height: 1; letter-spacing: -.025em; }
+    .work-info { max-width: 390px; font-size: 11px; font-weight: 300; line-height: 1.75; letter-spacing: .04em; }
+    .work-info small { display: block; margin-top: 10px; color: rgba(238,232,220,.3); font-size: 8px; letter-spacing: .22em; text-transform: uppercase; }
+    .work-arrow { font-size: 20px; font-weight: 200; transform: rotate(-35deg); transition: transform .4s ease; }
+    .work-item:hover .work-arrow { transform: rotate(0deg); }
+
+    .paper-transition { height: clamp(90px,13vw,190px); background: linear-gradient(to bottom, var(--ink), #14110d 58%, var(--paper)); }
+    .about { position: relative; padding: clamp(80px,11vw,160px) 0 100px; overflow: hidden; background: var(--paper); color: var(--paper-ink); }
+    .about::before { content: "N×"; position: absolute; right: -4vw; top: 5%; color: rgba(20,18,15,.035); font-family: var(--serif); font-size: min(42vw,620px); line-height: .75; letter-spacing: -.12em; pointer-events: none; }
+    .about-grid { position: relative; display: grid; grid-template-columns: .72fr 1.28fr; gap: 9vw; }
+    .about-label { padding-top: 10px; color: rgba(20,18,15,.52); font-size: 9px; letter-spacing: .28em; text-transform: uppercase; }
+    .about h2 { max-width: 900px; margin: 0; font-family: var(--serif); font-size: clamp(48px,7vw,102px); font-weight: 400; line-height: .94; letter-spacing: -.045em; }
+    .about h2 em { color: #76624d; font-style: italic; }
+    .about-copy { display: grid; grid-template-columns: repeat(2,1fr); gap: 4vw; margin-top: 70px; padding-top: 28px; border-top: 1px solid var(--line-dark); }
+    .about-copy p { margin: 0; color: rgba(20,18,15,.68); font-size: 13px; line-height: 1.95; }
+    .about-copy strong { color: var(--paper-ink); font-weight: 500; }
+    .principles { display: flex; flex-wrap: wrap; gap: 10px 26px; margin: 55px 0 0; padding: 0; list-style: none; color: rgba(20,18,15,.48); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
+    .principles li::before { content: "·"; margin-right: 12px; }
+    .contact { padding: 95px 0 42px; background: var(--paper); color: var(--paper-ink); }
+    .contact-row { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 50px; padding-top: 34px; border-top: 1px solid var(--line-dark); }
+    .contact small { color: rgba(20,18,15,.43); font-size: 8px; letter-spacing: .25em; text-transform: uppercase; }
+    .contact h2 { margin: 12px 0 0; font-family: var(--serif); font-size: clamp(40px,5vw,75px); font-weight: 400; letter-spacing: -.035em; }
+    .contact-link { display: inline-flex; align-items: center; gap: 15px; padding: 13px 0; border-bottom: 1px solid currentColor; font-size: 10px; letter-spacing: .2em; text-decoration: none; text-transform: uppercase; }
+    .contact-link span { transition: transform .3s ease; }
+    .contact-link:hover span { transform: translate(4px,-4px); }
+    footer { padding: 60px 0 32px; background: var(--paper); color: rgba(20,18,15,.45); }
+    .footer-row { display: flex; justify-content: space-between; gap: 30px; font-size: 8px; letter-spacing: .18em; text-transform: uppercase; }
+    .footer-row a { text-decoration: none; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: none; }
+    :focus-visible { outline: 1px solid currentColor; outline-offset: 7px; }
+
+    @media (max-width: 900px) {
+      .nav { height: 74px; }
+      .brand-rule, .brand-word { display: none; }
+      .brand { min-width: 30px; }
+      .hero-media { inset: -3% -35% -7% -12%; background-position: 61% 45%; }
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-meta { display: none; }
+      .archive-head { grid-template-columns: 1fr; gap: 34px; }
+      .archive-title span { margin-left: 8%; }
+      .work-item { grid-template-columns: 48px 1fr 24px; gap: 18px; min-height: 168px; }
+      .work-info { grid-column: 2; margin-top: -28px; padding-bottom: 30px; }
+      .work-arrow { grid-column: 3; grid-row: 1; }
+      .about-grid { grid-template-columns: 1fr; gap: 35px; }
+    }
+    @media (max-width: 620px) {
+      :root { --page: calc(100vw - 36px); }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 8px; letter-spacing: .14em; }
+      .nav-links a:nth-child(2) { display: none; }
+      .hero-media { inset: -2% -78% -5% -22%; background-position: 67% 45%; }
+      .hero::before { background: linear-gradient(180deg, rgba(5,5,5,.2), transparent 26%, rgba(5,5,5,.08) 50%, #050505 98%); }
+      .hero-content { align-items: end; padding-bottom: 82px; }
+      .hero-copy { max-width: 310px; }
+      .hero h1 { font-size: clamp(41px,13vw,58px); }
+      .hero-note { font-size: 11px; }
+      .scroll-cue { display: none; }
+      .archive { padding-top: 100px; }
+      .archive-head { padding-bottom: 42px; }
+      .archive-title { font-size: 18vw; }
+      .work-item { grid-template-columns: 34px 1fr 20px; gap: 12px; min-height: 155px; }
+      .work-name { font-size: 34px; }
+      .work-info { grid-column: 2 / 4; margin-top: -22px; font-size: 10px; }
+      .work-item:hover { padding-inline: 0; }
+      .about-copy { grid-template-columns: 1fr; gap: 25px; margin-top: 50px; }
+      .contact-row { grid-template-columns: 1fr; align-items: start; }
+      .footer-row { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .hero-media { transform: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header" id="top">
+    <nav class="nav page" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="Ninaix 首页"><span class="brand-symbol" aria-hidden="true">N<i>×</i></span><span class="brand-rule" aria-hidden="true"></span><span class="brand-word">Ninaix</span></a>
+      <div class="nav-links"><a href="#work">Work</a><a href="#about">About</a><a href="https://github.com/Ninaix0217" target="_blank" rel="noreferrer">GitHub</a></div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-content page">
+        <div class="hero-copy reveal">
+          <p class="overline">01 / A quiet archive</p>
+          <h1 id="hero-title">Fragments of thought, form, and <em>distant light.</em></h1>
+          <p class="hero-note">Ninaix 是一份仍在生长的个人档案。这里记录软件、设计、实验，以及那些尚未完成却值得继续靠近的想法。</p>
+        </div>
+        <div class="hero-meta" aria-label="网站信息"><span>Discipline</span><strong>Software / Digital</strong><span>Based in</span><strong>China</strong><span>Archive</span><strong>2025—Now</strong></div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span>Scroll to explore</div>
+    </section>
+    <section class="archive" id="work" aria-labelledby="work-title">
+      <div class="page">
+        <div class="archive-head reveal"><span class="section-index">Index / 2026</span><h2 class="archive-title" id="work-title">Selected <span>fragments</span></h2></div>
+        <ol class="work-list">
+          <li class="reveal"><a class="work-item" href="https://github.com/Ninaix0217" target="_blank" rel="noreferrer"><span class="work-number">01</span><h3 class="work-name">Ninaix Archive</h3><span class="work-info">个人数字身份与长期作品档案。持续整理学习路径、设计判断和正在形成的项目。<small>Identity / Web / Ongoing</small></span><span class="work-arrow" aria-hidden="true">→</span></a></li>
+          <li class="reveal"><a class="work-item" href="https://github.com/Ninaix0217?tab=repositories" target="_blank" rel="noreferrer"><span class="work-number">02</span><h3 class="work-name">Learning Systems</h3><span class="work-info">把编程基础、数据结构与工程练习变成可以运行、解释和复盘的系统。<small>Python / Java / Foundations</small></span><span class="work-arrow" aria-hidden="true">→</span></a></li>
+          <li class="reveal"><a class="work-item" href="https://github.com/Ninaix0217?tab=repositories" target="_blank" rel="noreferrer"><span class="work-number">03</span><h3 class="work-name">Experiments</h3><span class="work-info">小型界面、交互原型与技术实验。允许不成熟的念头先获得一个可以被观察的形状。<small>Interface / Motion / Studies</small></span><span class="work-arrow" aria-hidden="true">→</span></a></li>
+        </ol>
+      </div>
+    </section>
+    <div class="paper-transition" aria-hidden="true"></div>
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-grid page">
+        <p class="about-label reveal">02 / About Ninaix</p>
+        <div>
+          <h2 class="reveal" id="about-title">Learning to build with <em>clarity</em> and intention.</h2>
+          <div class="about-copy reveal"><p><strong>Ninaix</strong> 不是一个完成后的标签，而是我观察、学习和创造的方式。我目前专注于软件技术与 Web 开发，把模糊的念头拆解成清晰、可运行的作品。</p><p>比起用进度条描述能力，我更愿意留下真实的过程：做过什么、为什么这样做、哪里仍然不够，以及下一次会如何靠近更好的答案。</p></div>
+          <ul class="principles reveal" aria-label="关注方向"><li>Software foundations</li><li>Web development</li><li>Visual systems</li><li>Continuous practice</li></ul>
+        </div>
+      </div>
+    </section>
+    <section class="contact" aria-labelledby="contact-title">
+      <div class="contact-row page reveal"><div><small>03 / Continue the conversation</small><h2 id="contact-title">Find me in the archive.</h2></div><a class="contact-link" href="https://github.com/Ninaix0217" target="_blank" rel="noreferrer">Visit GitHub <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+  <footer><div class="footer-row page"><span>© <span id="year">2026</span> Ninaix</span><span>A quiet archive of things in progress</span><a href="#top">Back to orbit ↑</a></div></footer>
+  <script>
+    const header = document.querySelector('.site-header');
+    const heroMedia = document.querySelector('.hero-media');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const updateFrame = () => {
+      const y = window.scrollY;
+      header.classList.toggle('scrolled', y > 24);
+      if (!reduceMotion && y < window.innerHeight * 1.2) heroMedia.style.transform = `translate3d(0, ${Math.min(y * .055, 48)}px, 0) scale(1.035)`;
+    };
+    updateFrame();
+    addEventListener('scroll', updateFrame, { passive: true });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const reveals = document.querySelectorAll('.reveal');
+    if (reduceMotion || !('IntersectionObserver' in window)) reveals.forEach(item => item.classList.add('visible'));
+    else {
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .12, rootMargin: '0px 0px -7% 0px' });
+      reveals.forEach(item => observer.observe(item));
+    }
+  </script>
+</body>
+</html>
